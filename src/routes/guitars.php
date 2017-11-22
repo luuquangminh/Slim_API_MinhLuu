@@ -23,7 +23,7 @@ $app->get('/api/guitars', function(Request $request, Response $response){
         $stmt = $db->query($sql);
         $Guitars = $stmt->fetchAll(PDO::FETCH_OBJ);
         $db = null;
-        echo json_encode($Guitars);
+        return $response->withJSON($data);
     } catch(PDOException $e){
         echo '{"error": {"text": '.$e->getMessage().'}';
     }
@@ -40,7 +40,7 @@ $app->get('/api/guitars/{id}', function(Request $request, Response $response){
         $stmt = $db->query($sql);
         $Guitar = $stmt->fetch(PDO::FETCH_OBJ);
         $db = null;
-        echo json_encode($Guitar);
+        return $response->withJSON($data);
     } catch(PDOException $e){
         echo '{"error": {"text": '.$e->getMessage().'}';
     }
